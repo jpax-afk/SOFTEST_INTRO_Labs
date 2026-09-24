@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOFTEST_INTRO_Calculator.Un
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOFTEST_INTRO_Calculator.AcceptanceTests", "SOFTEST_INTRO_Calculator.AcceptanceTests\SOFTEST_INTRO_Calculator.AcceptanceTests.csproj", "{AE64A64E-CF3C-4218-BD10-7098FBAE3039}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOFTEST_INTRO_Calculator.IntegrationTests", "SOFTEST_INTRO_Calculator.IntegrationTests\SOFTEST_INTRO_Calculator.IntegrationTests.csproj", "{EBACE809-43DC-4133-9286-64A88D5338D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{AE64A64E-CF3C-4218-BD10-7098FBAE3039}.Release|x64.Build.0 = Release|Any CPU
 		{AE64A64E-CF3C-4218-BD10-7098FBAE3039}.Release|x86.ActiveCfg = Release|Any CPU
 		{AE64A64E-CF3C-4218-BD10-7098FBAE3039}.Release|x86.Build.0 = Release|Any CPU
+		{EBACE809-43DC-4133-9286-64A88D5338D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBACE809-43DC-4133-9286-64A88D5338D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBACE809-43DC-4133-9286-64A88D5338D1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EBACE809-43DC-4133-9286-64A88D5338D1}.Debug|x64.Build.0 = Debug|Any CPU
+		{EBACE809-43DC-4133-9286-64A88D5338D1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EBACE809-43DC-4133-9286-64A88D5338D1}.Debug|x86.Build.0 = Debug|Any CPU
+		{EBACE809-43DC-4133-9286-64A88D5338D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBACE809-43DC-4133-9286-64A88D5338D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBACE809-43DC-4133-9286-64A88D5338D1}.Release|x64.ActiveCfg = Release|Any CPU
+		{EBACE809-43DC-4133-9286-64A88D5338D1}.Release|x64.Build.0 = Release|Any CPU
+		{EBACE809-43DC-4133-9286-64A88D5338D1}.Release|x86.ActiveCfg = Release|Any CPU
+		{EBACE809-43DC-4133-9286-64A88D5338D1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
