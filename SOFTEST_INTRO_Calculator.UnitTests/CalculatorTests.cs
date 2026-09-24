@@ -20,7 +20,7 @@ public class CalculatorTests
  }
 
  [TestCase(0, 0, 0)]
- [TestCase(0, 5, 9)]
+ [TestCase(0, 5, 5)]
  [TestCase(-3, 8, 5)]
  [TestCase(0.1, 0.2, 0.3)]
  public void Add_RepresentativeInputs_ReturnsSum(
