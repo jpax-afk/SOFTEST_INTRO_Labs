@@ -1,35 +1,71 @@
-name: .NET build and tests 
+name: .NET build and tests
 
-on: 
-  push: 
-  pull_request: 
-  
-permissions: 
-  contents: read 
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-jobs: 
-  build-and-test: 
-    runs-on: ubuntu-latest 
-    
-    steps: 
-      - name: Check out repository 
-        uses: actions/checkout@v7 
-        
-      - name: Set up .NET 10 
-        uses: actions/setup-dotnet@v5 
-        with: 
-          dotnet-version: '10.0.x' 
-      
-      - name: Restore dependencies 
-        run: dotnet restore SOFTEST_INTRO_Labs.sln 
-        
-      - name: Build solution 
-        run: > 
-          dotnet build SOFTEST_INTRO_Labs.sln 
-          --configuration Release --no-restore 
-      
-      - name: Run all tests 
-        run: > 
-          dotnet test SOFTEST_INTRO_Labs.sln 
-          --configuration Release --no-build 
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore SOFTEST_INTRO_Labs.sln
+
+      - name: Build solution
+        run: >
+          dotnet build SOFTEST_INTRO_Labs.sln
+          --configuration Release --no-restore
+
+      - name: Run tests that do not need a browser
+        run: >
+          dotnet test SOFTEST_INTRO_Labs.sln
+          --configuration Release --no-build
+          --filter "TestCategory!=Browser"
           --verbosity normal
+
+      - name: Run browser tests
+        shell: bash
+        env:
+          HEADLESS: "true"
+          SOFTEST_INTRO_BROWSER: "chrome"
+          SOFTEST_INTRO_BASE_URL: http://127.0.0.1:5074
+          ASPNETCORE_URLS: http://127.0.0.1:5074
+        run: |
+          dotnet run \
+            --project SOFTEST_INTRO_Calculator.Web \
+            --configuration Release --no-build \
+            --no-launch-profile \
+            > calculator-web.log 2>&1 &
+
+          web_pid=$!
+          trap 'kill "$web_pid" 2>/dev/null || true' EXIT
+
+          for attempt in {1..30}; do
+            if curl --fail --silent \
+              "$SOFTEST_INTRO_BASE_URL" > /dev/null; then
+              break
+            fi
+
+            if [ "$attempt" -eq 30 ]; then
+              cat calculator-web.log
+              exit 1
+            fi
+
+            sleep 1
+          done
+
+          dotnet test \
+            SOFTEST_INTRO_Calculator.WebUiTests \
+            --configuration Release --no-build \
+            --verbosity normal
